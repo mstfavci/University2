@@ -1,0 +1,11 @@
+<ion-view view-title="Semesters">
+  <ion-content class="has-header">
+    <div class="list">
+    	<a class="item item-icon-right" ng-repeat="year in years" ng-click="selectYear(year.year)">
+    		{{year.year}}
+			<i class="icon ion-chevron-right icon-accessory"></i>
+    	</a>
+
+    </div>
+  </ion-content>
+</ion-view>

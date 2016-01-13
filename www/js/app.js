@@ -41,6 +41,36 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
+
+/*
+  .state('app.semester', {
+    url: '/semester',
+    abstract: true,
+    templateUrl: 'views/semester/semester.html',
+    //controller: 'SemesterCtrl'
+  })
+
+  .state('app.semester.years', {
+    url: '/years',
+    views: {
+      'viewContent': {
+        templateUrl: 'views/semester/years.html'//,
+        //controller : 'views/semester/years-ctrl.js'
+      }
+    }
+  })
+*/
+
+  .state('app.semester', {
+      url: '/semester',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/semester/semester.html',
+          controller: 'YearsCtrl'
+        }
+      }
+    })
+
   .state('app.browse', {
       url: '/browse',
       views: {
