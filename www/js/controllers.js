@@ -53,8 +53,32 @@ angular.module('starter.controllers', [])
 })
 
 .controller('YearsCtrl', ['$scope', '$state', 'semesterApi',function ($scope, $state, semesterApi) {
-  $scope.years = semesterApi.getYears();
-  console.log($scope.years);
+  semesterApi.getYears(function(data){
+    console.log(data);
+
+    var newData = [];
+
+    for (var i = 0; i < data.length; i++) {
+      var yearValue = data[i].trim();
+      if (yearValue!="")
+      {
+        var inTheList = false;
+        for (var j = 0; j < newData.length; j++) {
+          if (newData[j].year == yearValue)
+          {
+            inTheList = true;
+            break;
+          }
+        };
+        if (!inTheList)
+          newData.push({year:yearValue});
+      }
+    };
+
+    $scope.years = newData;
+    //console.log($scope.years);
+  });
+  
 
   $scope.selectYear = function(year){
       $state.go("app.search");
