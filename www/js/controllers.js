@@ -53,7 +53,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('YearsCtrl', ['$scope', '$state', 'semesterApi',function ($scope, $state, semesterApi) {
-  semesterApi.getYears(function(data){
+  semesterApi.getYears().then(function(data){ 
     console.log(data);
 
     var newData = [];

@@ -24,23 +24,31 @@
 
 })();*/
 
-angular.module('starter').factory('semesterApi',['$http',function semesterApiFactory($http){
+angular.module('starter').factory('semesterApi',['$http','$q','$ionicLoading',function semesterApiFactory($http, $q, $ionicLoading){
 	var factory = {};
 
-	factory.getYears = function (callback){
+	factory.getYears = function (){
+		var deferred = $q.defer();
+
+
+		$ionicLoading.show({template:'Loading...'});
+
 		$http({
 			method:'get',
-//url: "http://10.9.181.32/UniversityUI/api/GetYears",
-url: "http://USCMPDEPC218/UniversityUI/api/GetYears",
-    dataType: 'jsonp'		
-}
-			).success(function(data){
-  			
-			callback(data);
+		//url: "http://10.9.181.32/UniversityUI/api/GetYears",
+		url: "http://USCMPDEPC218/UniversityUI/api/GetYears",
+		    dataType: 'jsonp'		
+		}).success(function(data){
+  			$ionicLoading.hide();
+			deferred.resolve(data);
 		}).error(function(err){
-			console.log("hata oldu ula ");
-
+			console.log("hata oldu ula " + err);
+			$ionicLoading.hide();
+			deferred.reject();
 		});
+
+		return deferred.promise;
+
 	}
 
 	return factory;
